@@ -8,7 +8,11 @@
 <h1>Home view</h1>
 
 <div ng-app="myapp" ng-controller="HomeCtrl">
-    <div class="widget-box" city-weather="'Annecy'"></div>
+    <form id="city-form" ng-submit="addCity()">
+        <input id="new-city" placeholder="Add a city" ng-model="newCity" ng-disabled="saving" autofocus>
+    </form>
+
+    <div id="container" class="widget-box" city-weather=""></div>
 </div>
 
 </body>
