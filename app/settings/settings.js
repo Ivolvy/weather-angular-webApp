@@ -78,7 +78,7 @@ angular.module('myApp.settings', ['ngRoute'])
                 this.addCityInList = function($scope, city){
                     angular.element(document.getElementById('weather-list')).append($compile('<li>' +
                         '<span>'+city+'</span>' +
-                        '<div class="delete-city">delete</div>' +
+                        '<div class="delete-city" data-city="'+city+'" ng-click="deleteCity($event)">delete</div>' +
                         '</li>')($scope));
                 };
             },
@@ -96,7 +96,6 @@ angular.module('myApp.settings', ['ngRoute'])
 
                 //When we validate the form
                 $scope.addCity = function(){
-                    console.log('coucou');
                     if($scope.newCity != ""){
 
                         //Get the information for a city
@@ -108,7 +107,17 @@ angular.module('myApp.settings', ['ngRoute'])
                         //Set input to empty
                         angular.element(document.getElementById('new-city')).val('');
                     }
-                }
+                };
+
+                //When we delete a city
+                $scope.deleteCity = function($event){
+                    if($event.target.getAttribute("city") != ""){
+
+                        //remove the object occurences
+                        delete($scope.weather[$event.target.getAttribute("data-city")]);
+                        $event.target.parentNode.remove();
+                    }
+                };
             }
         };
 
