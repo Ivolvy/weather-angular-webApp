@@ -53,26 +53,45 @@ angular.module('myApp.home', ['ngRoute'])
     .directive('cityWeather', function(cityWeatherService, $compile) {
         return {
             restrict: 'AEC',
-            link: function ($scope, element, attrs) {
+            controller: function(){
+                this.loadTemplate = function($scope, city){
+                    angular.element(document.getElementById('container')).append($compile("" +
+                        '<div id="'+city+'" class="city-name" ng-model="'+city+'">' +
+                        '<h1 class="title">'+$scope.weather[city].city+'<img src="'+$scope.weather[city].icon+'"/></h1>' +
+                        '<h3 class="tempW">'+$scope.weather[city].temp+'&deg;C</h3>' +
+                        '<h3 class="wDescription">'+$scope.weather[city].weatherDescription+'</h3>' +
+                        '<h4 class="minAndMax">Min: '+$scope.weather[city].minTemp+'&deg;C, Max: '+$scope.weather[city].maxTemp+'&deg;C</h4>' +
+                        '<h4 class="windSpeed">Wind speed: '+$scope.weather[city].windSpeed+'</h4>' +
+                        '</div>')($scope));
+                }
+            },
+            link: function ($scope, element, attrs, cityWeatherController) {
+
+                //we retrieve all the city selected if they exists
+                if(Object.keys($scope.weather).length > 0){
+                    for(var city in $scope.weather){
+                        cityWeatherController.loadTemplate($scope, city);
+                    }
+                }
+
+                //add a city
                 $scope.addCity = function() {
                     if($scope.newCity != ""){
                         $scope.city = $scope.newCity.replace(/ /g,""); //we delete all the whitespaces
 
                         cityWeatherService.asyncGreet($scope.city).then(function(data) { //get all data for a city
-                            angular.element(document.getElementById('container')).append($compile("" +
-                                '<div id="'+$scope.city+'" class="city-name" ng-model="'+$scope.city+'">' +
-                                '<h1 class="title"></h1>' +
-                                '<h3 class="tempW" ng-model="tempW">&deg;C</h3>' +
-                                '<h3 class="wDescription"></h3>' +
-                                '<h4 class="minAndMax"></h4>' +
-                                '<h4 class="windSpeed"></h4>' +
-                                '</div>')($scope));
 
-                            angular.element(document.getElementById($scope.city).getElementsByClassName('title')).html($scope.city +'<img src="'+data.getIcon()+'"/>');
-                            angular.element(document.getElementById($scope.city).getElementsByClassName('tempW')).html(data.getTemp()+'&deg;C');
-                            angular.element(document.getElementById($scope.city).getElementsByClassName('wDescription')).html(data.getWeatherDescription());
-                            angular.element(document.getElementById($scope.city).getElementsByClassName('minAndMax')).html('Min: '+data.getMinTemp()+'&deg;C, Max: '+data.getMaxTemp()+'&deg;C ');
-                            angular.element(document.getElementById($scope.city).getElementsByClassName('windSpeed')).html('Wind speed: '+data.getWindSpeed());
+                            $scope.weather[$scope.city] = {
+                                city: $scope.city,
+                                icon: data.getIcon(),
+                                temp: data.getTemp(),
+                                weatherDescription: data.getWeatherDescription(),
+                                minTemp: data.getMinTemp(),
+                                maxTemp: data.getMaxTemp(),
+                                windSpeed: data.getWindSpeed(),
+                            };
+
+                            cityWeatherController.loadTemplate($scope, $scope.city);
 
                         }, function() {alert('please insert a correct city')});
                     }
