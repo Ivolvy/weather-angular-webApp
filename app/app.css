@@ -9,3 +9,8 @@
     width: 310px;
     padding: 10px;
 }
+
+.delete-city{
+    margin-left: 20px;
+    display: inline-block;
+}

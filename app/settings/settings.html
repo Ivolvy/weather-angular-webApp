@@ -7,5 +7,14 @@
 <body>
 <h1>Settings view</h1>
 
+<form id="city-form" ng-submit="addCity()">
+    <input id="new-city" placeholder="Add a city" ng-model="newCity" ng-disabled="saving" autofocus>
+</form>
+
+<div class="title-list">City List</div>
+
+<ul id='weather-list' class="weather-list">
+</ul>
+
 </body>
 </html>
