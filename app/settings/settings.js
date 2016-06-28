@@ -20,7 +20,7 @@ angular.module('myApp.settings', ['ngRoute'])
                 return this.data && this.data.wind ? this.data.wind.speed : null;
             };
             this.getWeatherDescription = function() {
-                return this.data && this.data.weather ? this.data.weather[0].description : null;
+                return this.data && this.data.weather && this.data.weather[0] ? this.data.weather[0].description : null;
             };
             this.getMinTemp = function() {
                 return this.data && this.data.main ? this.data.main.temp_min : null;
@@ -29,6 +29,9 @@ angular.module('myApp.settings', ['ngRoute'])
                 return this.data && this.data.main ? this.data.main.temp_max : null;
             };
 
+            this.getWeatherId = function() {
+                return this.data && this.data.weather && this.data.weather[0] ? this.data.weather[0]['id'] : null;
+            };
             this.getIconCode = function() {
                 return this.data && this.data.weather && this.data.weather[0] ? this.data.weather[0]['icon'] : null;
             };
@@ -63,7 +66,7 @@ angular.module('myApp.settings', ['ngRoute'])
 
                             $scope.weather[$scope.city] = {
                                 city: $scope.city,
-                                icon: data.getIcon(),
+                                weatherId: data.getWeatherId(),
                                 temp: data.getTemp(),
                                 weatherDescription: data.getWeatherDescription(),
                                 minTemp: data.getMinTemp(),
@@ -78,7 +81,7 @@ angular.module('myApp.settings', ['ngRoute'])
                 this.addCityInList = function($scope, city){
                     angular.element(document.getElementById('weather-list')).append($compile('<li>' +
                         '<span>'+city+'</span>' +
-                        '<div class="delete-city" data-city="'+city+'" ng-click="deleteCity($event)">delete</div>' +
+                        '<div class="delete-city" data-city="'+city+'" ng-click="deleteCity($event)"><img src="../resources/delete.svg" delete</div>' +
                         '</li>')($scope));
                 };
             },
@@ -114,8 +117,8 @@ angular.module('myApp.settings', ['ngRoute'])
                     if($event.target.getAttribute("city") != ""){
 
                         //remove the object occurences
-                        delete($scope.weather[$event.target.getAttribute("data-city")]);
-                        $event.target.parentNode.remove();
+                        delete($scope.weather[$event.target.parentNode.getAttribute("data-city")]);
+                        $event.target.parentNode.parentNode.remove();
                     }
                 };
             }

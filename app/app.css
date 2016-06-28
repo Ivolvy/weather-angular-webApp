@@ -4,13 +4,30 @@
   list-style: none;
 }
 
+#widget-container{
+    text-align: center;
+}
+
+.weather-icon{
+    margin-left: 20px;
+    vertical-align: middle;
+    color: #924da3;
+}
+
 .city-name{
     border: 1px solid black;
     width: 310px;
     padding: 10px;
+    display: inline-block;
+    margin: 10px;
 }
 
 .delete-city{
     margin-left: 20px;
     display: inline-block;
+}
+
+.delete-city img{
+    width: 20px;
+    cursor: pointer;
 }

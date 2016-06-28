@@ -15,7 +15,7 @@ angular.module('myApp.home', ['ngRoute'])
                 this.loadTemplate = function($scope, city){
                     angular.element(document.getElementById('widget-container')).append($compile("" +
                         '<div id="'+city+'" class="city-name" ng-model="'+city+'">' +
-                        '<h1 class="title">'+$scope.weather[city].city+'<img src="'+$scope.weather[city].icon+'"/></h1>' +
+                        '<h1 class="title">'+$scope.weather[city].city+'<i class="weather-icon wi wi-owm-'+$scope.weather[city].weatherId+'"></i></h1>' +
                         '<h3 class="tempW">'+$scope.weather[city].temp+'&deg;C</h3>' +
                         '<h3 class="wDescription">'+$scope.weather[city].weatherDescription+'</h3>' +
                         '<h4 class="minAndMax">Min: '+$scope.weather[city].minTemp+'&deg;C, Max: '+$scope.weather[city].maxTemp+'&deg;C</h4>' +
