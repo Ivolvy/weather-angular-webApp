@@ -5,11 +5,17 @@
     <title></title>
 </head>
 <body>
-<h1>Settings view</h1>
+<h1 class="page-title">SETTINGS</h1>
 
-<form id="city-form" ng-submit="addCity()">
-    <input id="new-city" placeholder="Add a city" ng-model="newCity" ng-disabled="saving" autofocus>
-</form>
+<div class="add-city">
+    <form id="city-form" class="input input--ichiro" ng-submit="addCity()">
+        <input id="new-city" list="cityList" class="input__field input__field--ichiro" type="text" ng-model="newCity" ng-disabled="saving" autofocus>
+        <datalist id="cityList"></datalist>
+        <label class="city-form-label input__label input__label--ichiro" for="new-city">
+            <span class="city-form-text input__label-content input__label-content--ichiro">Add a city</span>
+        </label>
+    </form>
+</div>
 
 <div class="title-list">City List</div>
 

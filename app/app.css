@@ -1,33 +1,327 @@
-/* app css stylesheet */
+html, body{
+    font-family: "Lato", sans-serif;
+}
+
+body{
+    background-color: #6495ED;
+}
+
+
+/*----------------------------------------------*/
+/*-------------------GENERAL--------------------*/
+/*----------------------------------------------*/
 
 .menu {
   list-style: none;
 }
 
+.page-title{
+    text-align: center;
+    font-size: 70px;
+    color: #FFF;
+}
+
+
+.help-text{
+    text-align: center;
+    color: #4D4D4D;
+    font-size: 35px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    margin: auto;
+}
+
 #widget-container{
+    text-align: center;
+    margin-top: 70px;
+}
+
+.city-name{
+    border: 1px solid #4D4D4D;
+    width: 310px;
+    padding: 10px;
+    display: inline-block;
+    margin: 10px;
+    color: #4D4D4D;
+    background-color: #FFF;
+    border-radius: 20px;
+    box-shadow: 0 8px 6px -6px #4D4D4D;
+}
+
+.delete-city{
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-left: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #4D4D4D;
+    -webkit-mask: url(resources/delete.svg) no-repeat 50% 50%;
+    mask: url(resources/delete.svg) no-repeat 50% 50%;
+}
+
+
+
+
+.add-city{
+    text-align: center;
+}
+#city-form{
+    margin-top: 70px;
+}
+.city-form-label{
+    cursor: pointer;
+}
+.city-form-text{
+    font-size: 20px;
     text-align: center;
 }
 
+.title-list{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bolder;
+    margin-top: 30px;
+    border-bottom: 1px solid #4D4D4D;
+    color: #4D4D4D;
+    width: 166px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.weather-list{
+    font-size: 25px;
+    list-style: none;
+    text-align: center;
+    margin-top: 35px;
+    padding: 0;
+}
+.weather-list li{
+    margin-top: 20px;
+    color: #4D4D4D;
+}
 .weather-icon{
     margin-left: 20px;
     vertical-align: middle;
     color: #924da3;
 }
 
-.city-name{
-    border: 1px solid black;
-    width: 310px;
-    padding: 10px;
-    display: inline-block;
-    margin: 10px;
-}
+/*----------------------------------------------*/
+/*--------------HAMB MENU ANIMATION-------------*/
+/*----------------------------------------------*/
 
-.delete-city{
-    margin-left: 20px;
-    display: inline-block;
-}
-
-.delete-city img{
-    width: 20px;
+#hamb-menu {
+    right: 84px;
+    z-index: 10;
+    width: 30px;
+    height: 18px;
+    position: fixed;
+    margin: 40px auto;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
     cursor: pointer;
+}
+
+#hamb-menu span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #4D4D4D;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+}
+
+#hamb-menu.open span {
+    background: #fff;
+}
+
+#hamb-menu span:nth-child(1) {
+    top: 0px;
+}
+
+#hamb-menu span:nth-child(2), #hamb-menu span:nth-child(3) {
+    top: 6px;
+    height: 3px;
+}
+
+#hamb-menu span:nth-child(4) {
+    top: 14px;
+}
+
+#hamb-menu.open span:nth-child(1) {
+    top: 7px;
+    width: 0%;
+    left: 50%;
+}
+
+#hamb-menu.open span:nth-child(2) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#hamb-menu.open span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+#hamb-menu.open span:nth-child(4) {
+    top: 7px;
+    width: 0%;
+    left: 50%;
+}
+
+/*----------------------------------------------*/
+/*--------------OPEN MENU LIBRARY---------------*/
+/*----------------------------------------------*/
+
+.overlay {
+    position: fixed;
+    /*background: #cf2949;*/
+    background: #1086AD;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity .35s, visibility .35s, height .35s;
+    transition: opacity .35s, visibility .35s, height .35s;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.overlay-menu a{
+    cursor: pointer;
+}
+
+.overlay.open {
+    opacity: .9;
+    visibility: visible;
+    height: 100%;
+    z-index: 3;
+}
+
+.overlay nav {
+    position: relative;
+    height: 70%;
+    top: 51%;  /*50% original*/
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 45px;
+    text-align: center;
+}
+
+
+.overlay ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+    position: relative;
+    height: 100%;
+}
+
+.overlay ul li {
+    display: block;
+    height: 25%;
+    min-height: 50px;
+    position: relative;
+    opacity: 0;
+    margin-top: 30px;
+}
+
+.overlay.open li, .overlay.open .follow{
+    -webkit-animation: fadeInUp .5s ease forwards;
+    animation: fadeInUp .5s ease forwards;
+    -webkit-animation-delay: .35s;
+    animation-delay: .35s;
+}
+
+.overlay.open li:nth-of-type(2) {
+    -webkit-animation-delay: .4s;
+    animation-delay: .4s;
+    margin-top: 90px;
+}
+
+.overlay.open .follow{
+    -webkit-animation-delay: .55s;
+    animation-delay: .60s;
+}
+
+.overlay ul li a {
+    display: block;
+    position: relative;
+    color: #FFF;
+    text-decoration: none;
+    font-family: "Lato", sans-serif;
+    font-size: 90px;
+}
+
+.overlay ul li a:hover:after, .overlay ul li a:focus:after, .overlay ul li a:active:after {
+    width: 100%;
+}
+
+.overlay ul li a:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 0;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    height: 3px;
+    background: #FFF;
+    -webkit-transition: .35s;
+    transition: .35s;
+}
+
+.follow{
+    font-size: 16px;
+    color: #fff;
+    position: absolute;
+    bottom: 5px;
+    text-align: center;
+    left: 0;
+    right: 0;
+    display: block;
+    opacity: 0;
+}
+.follow a{
+    text-decoration: none;
+    color: #fff;
+}
+.follow a:hover{
+    color: #fff;
+}
+.follow a:visited{
+    color: #fff;
+}
+.title-follow{
+    margin-bottom: 5px;
 }

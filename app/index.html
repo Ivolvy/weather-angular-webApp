@@ -12,14 +12,39 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/animate.css">
   <link rel="stylesheet" href="css/weather-icons.min.css">
+  <link rel="stylesheet" href="css/ichiro-input.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#!/home">Home</a></li>
-    <li><a href="#!/settings">Settings</a></li>
-  </ul>
+  <header>
+    <div id="hamb-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <nav class="overlay-menu">
+        <ul>
+          <li><a class="redirect" href="#!/home">Home</a></li>
+          <li><a class="redirect" href="#!/settings">Settings</a></li>
+        </ul>
+      </nav>
+      <div class="follow">
+        <p class="title-follow">Follow me:</p>
+        <p>
+          <a target="_blank" href="https://instagram.com/michaelgentyphoto/">Instagram</a> |
+          <a target="_blank" href="https://fr.linkedin.com/in/michaël-genty-0730b5a5">LinkedIn</a> |
+          <a target="_blank" href="http://codepen.io/Ivolvy/">Codepen</a>
+        </p>
+      </div>
+    </div>
+  </header>
 
   <div ng-view></div>
 
@@ -28,11 +53,13 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+  <script src="vendor/zepto.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
   <script src="home/home.js"></script>
   <script src="settings/settings.js"></script>
+  <script src="js/general.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

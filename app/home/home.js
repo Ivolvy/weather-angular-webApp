@@ -28,13 +28,16 @@ angular.module('myApp.home', ['ngRoute'])
 
                 //we retrieve all the city selected if they exists
                 if(Object.keys($scope.weather).length > 0){
-                    console.log($scope.weather);
+                    $('.help-text').hide();
                     for(var city in $scope.weather){
                         //If we have already all the data
                         if($scope.weather[city].dataFilled == true){
                             cityWeatherController.loadTemplate($scope, city);
                         }
                     }
+                }
+                else{
+                    $('.help-text').show();
                 }
             }
         };

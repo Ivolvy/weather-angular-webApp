@@ -81,11 +81,38 @@ angular.module('myApp.settings', ['ngRoute'])
                 this.addCityInList = function($scope, city){
                     angular.element(document.getElementById('weather-list')).append($compile('<li>' +
                         '<span>'+city+'</span>' +
-                        '<div class="delete-city" data-city="'+city+'" ng-click="deleteCity($event)"><img src="../resources/delete.svg" delete</div>' +
+                        '<div class="delete-city" data-city="'+city+'" ng-click="deleteCity($event)"></div>' +
                         '</li>')($scope));
                 };
+
+                this.loadJSON = function(callback) {
+
+                    var xobj = new XMLHttpRequest();
+                    xobj.overrideMimeType("application/json");
+                    xobj.open('GET', '/resources/city.list.json', true); // Replace 'my_data' with the path to your file
+                    xobj.onreadystatechange = function () {
+                        if (xobj.readyState == 4 && xobj.status == "200") {
+                            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                            callback(xobj.responseText);
+                        }
+                    };
+                    xobj.send(null);
+                }
             },
             link: function ($scope, element, attrs, weatherListController) {
+
+                //Load city json list - Disabled -> to much data -> causes a lot of lag - to improve
+                /*weatherListController.loadJSON(function(response) {
+                    // Parse JSON string into object
+                    var actual_JSON = JSON.parse(response);
+
+                    $('#cityList').attr('enabled', 'true');
+                    $.each(actual_JSON, function() {
+                        $('#cityList').append(
+                            $("<option></option>").text(this._id).val(this.name)
+                        );
+                    });
+                });*/
 
                 //we retrieve all the city selected if they exists
                 if(Object.keys($scope.weather).length > 0){
@@ -117,8 +144,8 @@ angular.module('myApp.settings', ['ngRoute'])
                     if($event.target.getAttribute("city") != ""){
 
                         //remove the object occurences
-                        delete($scope.weather[$event.target.parentNode.getAttribute("data-city")]);
-                        $event.target.parentNode.parentNode.remove();
+                        delete($scope.weather[$event.target.getAttribute("data-city")]);
+                        $event.target.parentNode.remove();
                     }
                 };
             }
