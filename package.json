@@ -2,7 +2,7 @@
   "name": "angular-seed",
   "private": true,
   "version": "0.0.0",
-  "description": "Weather project for Aqfds",
+  "description": "Weather project",
   "repository": "",
   "license": "MIT",
   "devDependencies": {
