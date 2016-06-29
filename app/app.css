@@ -61,8 +61,7 @@ body{
     vertical-align: middle;
     cursor: pointer;
     background-color: #4D4D4D;
-    -webkit-mask: url(resources/delete.svg) no-repeat 50% 50%;
-    mask: url(resources/delete.svg) no-repeat 50% 50%;
+    background: url(resources/delete.svg);
 }
 
 
